@@ -6,4 +6,5 @@ const rootReducer = combineReducers(reducers);
 
 export default configureStore({
   reducer: rootReducer,
+  devTools: true,
 });
