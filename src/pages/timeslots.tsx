@@ -3,12 +3,13 @@ import EditorLink from 'components/EditorLink';
 import TimeSlots from 'components/TimeSlots';
 import Section from 'components/Section';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getTimeSlots, timeslotsSelectors } from 'store/timeslots';
+import { StoreType, useAppDispatch } from 'store';
 
 const TimeSlotPage = () => {
-  const dispatch = useDispatch();
-  const timeslots = useSelector((state) => timeslotsSelectors.selectAll(state.timeslots));
+  const dispatch = useAppDispatch();
+  const timeslots = useSelector<StoreType>((state) => timeslotsSelectors.selectAll(state.timeslots));
 
   useEffect(() => {
     dispatch(getTimeSlots());
