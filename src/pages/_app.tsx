@@ -9,6 +9,10 @@ const theme = createMuiTheme({
   palette: {
     primary: { main: '#000' },
     secondary: { main: '#FFF' },
+    text: { primary: '#606060' },
+  },
+  typography: {
+    fontFamily: ['Poppins', 'Roboto'].join(','),
   },
 });
 
