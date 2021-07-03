@@ -1,10 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import {
-  Checkbox,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from '@material-ui/core';
+import { Checkbox, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 
@@ -18,14 +13,7 @@ type Props = {
 };
 
 const TaskList = (props: Props) => {
-  const {
-    tasks,
-    name,
-    title,
-    onChange,
-    onComplete,
-    expected = props.tasks.length,
-  } = props;
+  const { tasks, name, title, onChange, onComplete, expected = props.tasks.length } = props;
   const [localForm, setLocalForm] = useState({});
 
   useEffect(() => {
@@ -43,14 +31,10 @@ const TaskList = (props: Props) => {
   }, [localForm]);
 
   const numberOfAchievedTasks = useMemo(() => {
-    return Object.keys(localForm).filter((goal) => localForm[goal] === true)
-      .length;
+    return Object.keys(localForm).filter((goal) => localForm[goal] === true).length;
   }, [localForm]);
 
-  const isAchievedAllTasks = useMemo(() => numberOfAchievedTasks >= expected, [
-    numberOfAchievedTasks,
-    expected,
-  ]);
+  const isAchievedAllTasks = useMemo(() => numberOfAchievedTasks >= expected, [numberOfAchievedTasks, expected]);
 
   useEffect(() => {
     onComplete?.(isAchievedAllTasks);

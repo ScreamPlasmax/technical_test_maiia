@@ -8,9 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json(appointments);
       break;
     case 'POST':
-      const { patientId, practitionerId, startDate, endDate } = JSON.parse(
-        req.body,
-      );
+      const { patientId, practitionerId, startDate, endDate } = JSON.parse(req.body);
       const appointment = await prisma.appointment.create({
         data: {
           patientId: parseInt(patientId),

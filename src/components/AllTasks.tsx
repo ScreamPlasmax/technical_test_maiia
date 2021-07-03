@@ -49,14 +49,12 @@ const AllTasks = (props: Props) => {
         name="tasks-bonus"
         onComplete={setIsAllAchievedTasksBonus}
       />
-      {isAllAchievedTasksForm &&
-        isAllAchievedTasksList &&
-        isAllAchievedTasksBonus && (
-          <p>
-            You finished the test, congratulation ! Before sending your project,
-            make sure that everything works well and that your code is clean.
-          </p>
-        )}
+      {isAllAchievedTasksForm && isAllAchievedTasksList && isAllAchievedTasksBonus && (
+        <p>
+          You finished the test, congratulation ! Before sending your project, make sure that everything works well and
+          that your code is clean.
+        </p>
+      )}
     </div>
   );
 };

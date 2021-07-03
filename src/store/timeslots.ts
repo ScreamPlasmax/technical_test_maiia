@@ -1,9 +1,5 @@
 import { Timeslot } from '@prisma/client';
-import {
-  createAsyncThunk,
-  createEntityAdapter,
-  createSlice,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import config from 'config';
 import { parseIds } from 'store/utils';
 
@@ -16,8 +12,7 @@ export const getTimeSlots = createAsyncThunk('getTimeSlots', async () => {
 });
 
 const timeslotsAdapter = createEntityAdapter<Timeslot>({
-  sortComparer: (a, b) =>
-    new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
+  sortComparer: (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
 });
 
 export const timeslotsSelectors = timeslotsAdapter.getSelectors();

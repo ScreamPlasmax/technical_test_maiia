@@ -27,10 +27,7 @@ export const Header = (props: Props) => {
     <AppBar position="static">
       <Toolbar>
         <Link href="/">
-          <IconButton
-            classes={{ label: classes.backLabel }}
-            disabled={pathname === '/'}
-          >
+          <IconButton classes={{ label: classes.backLabel }} disabled={pathname === '/'}>
             M
           </IconButton>
         </Link>

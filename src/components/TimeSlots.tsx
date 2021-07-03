@@ -11,11 +11,7 @@ const TimeSlots = (props) => {
   return (
     <List className="timeSlots" datacy="timeslot-list">
       {items.map((item) => (
-        <Card
-          key={item.id}
-          datacy={getTimeSlotDatacy(item.id)}
-          className="timeSlot__item btn"
-        >
+        <Card key={item.id} datacy={getTimeSlotDatacy(item.id)} className="timeSlot__item btn">
           <CardHeader
             avatar={<CalendarTodayIcon />}
             title={

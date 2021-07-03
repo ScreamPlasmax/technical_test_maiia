@@ -8,11 +8,7 @@ type Props = { path: string; children: ReactNode };
 
 const EditorLink = (props: Props) => {
   const { path, children } = props;
-  return (
-    <Link href={`vscode://file/${CURRENT_WORKING_DIRECTORY}/${path}`}>
-      {children}
-    </Link>
-  );
+  return <Link href={`vscode://file/${CURRENT_WORKING_DIRECTORY}/${path}`}>{children}</Link>;
 };
 
 export default EditorLink;
