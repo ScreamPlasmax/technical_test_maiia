@@ -30,3 +30,33 @@
     }
   }
 }
+
+.button {
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 8px 24px;
+
+  border-radius: 100px;
+  border: 2px solid;
+
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+
+  -webkit-transition: background-color 300ms ease-out, border 300ms ease-out;
+  -moz-transition: background-color 300ms ease-out, border 300ms ease-out;
+  -o-transition: background-color 300ms ease-out, border 300ms ease-out;
+
+  &.form-button {
+    margin-top: 32px;
+    margin-bottom: 20px;
+
+    border-color: #f68092;
+    background-color: #f68092;
+
+    &:hover {
+      background-color: #e35d78;
+      border-color: #e35d78;
+    }
+  }
+}
