@@ -618,15 +618,6 @@ section {
   form {
     display: flex;
     flex-direction: column;
-    & > div:not(.cta) {
-      display: flex;
-      align-items: center;
-      min-height: 48px;
-      > label {
-        display: grid;
-        grid-template-columns: 150px 300px;
-      }
-    }
 
     ul {
       display: flex;

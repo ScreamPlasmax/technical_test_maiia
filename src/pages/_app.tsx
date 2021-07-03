@@ -7,7 +7,7 @@ import 'styles/technical_test.scss';
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#000' },
+    primary: { main: '#000', dark: '#F68092' },
     secondary: { main: '#FFF' },
     text: { primary: '#606060' },
   },
