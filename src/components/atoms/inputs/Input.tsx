@@ -7,11 +7,7 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 const Input: FC<InputProps> = (props) => {
   const { className = '', ...rest } = props;
 
-  return (
-    <div className="input">
-      <input className={className} {...rest} />
-    </div>
-  );
+  return <input className={`input ${className}`} {...rest} />;
 };
 
 export default Input;
