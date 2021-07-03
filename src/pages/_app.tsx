@@ -3,7 +3,6 @@ import { Layout } from 'components/Layout';
 import { Provider } from 'react-redux';
 import store from 'store';
 import 'styles/styles.scss';
-import 'styles/config.scss';
 import 'styles/technical_test.scss';
 
 const theme = createMuiTheme({

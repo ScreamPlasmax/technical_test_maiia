@@ -9,6 +9,11 @@ class MyDocument extends Document {
         <Head>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Poppins:400,400i,500,600,700,800,900&display=swap"
+            rel="stylesheet"
+            crossOrigin=""
+          />
         </Head>
         <body>
           <Main />
