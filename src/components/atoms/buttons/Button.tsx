@@ -1,20 +1,20 @@
-import { ButtonHTMLAttributes, FC } from 'react';
-import { BUTTON_STYLE } from 'utils/constants/style';
+import { FC } from 'react';
+import { Button as MUIButton, ButtonProps, makeStyles } from '@material-ui/core';
 
-export type VariantType = 'FORM' | 'BUTTON';
+const useStyles = makeStyles(() => ({
+  root: {
+    marginTop: 20,
+  },
+}));
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  className?: string;
-  variant?: VariantType;
-};
-
-const Button: FC<Props> = (props) => {
-  const { className = '', variant = 'BUTTON', children, ...rest } = props;
+const Button: FC<ButtonProps> = (props) => {
+  const { children, variant = 'contained', ...rest } = props;
+  const classes = useStyles();
 
   return (
-    <button className={`button ${BUTTON_STYLE[variant]} ${className}`} {...rest}>
+    <MUIButton disableElevation variant={variant} classes={classes} {...rest}>
       {children}
-    </button>
+    </MUIButton>
   );
 };
 
