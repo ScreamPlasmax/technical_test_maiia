@@ -21,7 +21,7 @@ const initialValues = {
 const validationSchema = Yup.object().shape({
   practitioner: Yup.number().nullable().required('Le praticien est requis'),
   patient: Yup.number().nullable().required('Le patient est requis'),
-  timeslot: Yup.number().nullable().required('Le timeslot est requis'),
+  timeslot: Yup.number().nullable().required('Le créneau est requis'),
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +74,7 @@ const AppointmentForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(data) => {
+        onSubmit={(data, { resetForm }) => {
           const selectedTimeslot = timeslots.find((timeslot) => timeslot.id === data.timeslot);
 
           if (!selectedTimeslot) {
@@ -88,6 +88,7 @@ const AppointmentForm = () => {
           };
 
           dispatch(postAppointment(JSON.stringify(body)));
+          resetForm();
         }}
       >
         <Form className={classes.formContent}>

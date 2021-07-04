@@ -40,7 +40,7 @@ const TimeslotsSelectField: FC<Props> = (props) => {
   return (
     <SelectField
       name="timeslot"
-      label="Timeslot"
+      label="Créneau"
       disabledLabel="Choisissez un créneau"
       disabled={!field.value || (meta.touched && !!meta.error)}
     >
