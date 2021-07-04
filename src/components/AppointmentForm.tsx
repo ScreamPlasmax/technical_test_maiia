@@ -4,14 +4,15 @@ import { makeStyles, MenuItem } from '@material-ui/core';
 import SelectField from 'components/atoms/selects/SelectField';
 
 const initialValues = {
-  firstName: '1',
+  practitioner: null,
+  patient: null,
 };
 
 const useStyles = makeStyles((theme) => ({
   form: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: 600,
+    maxWidth: 600,
     borderRadius: 5,
     overflow: 'hidden',
     backgroundColor: 'white',
@@ -43,7 +44,12 @@ const AppointmentForm = () => {
         }}
       >
         <Form className={classes.formContent}>
-          <SelectField name="firstName" label="Age">
+          <SelectField name="practitioner" label="Pratitien" disabledLabel="Choisissez un praticien">
+            <MenuItem value="1">Gérard</MenuItem>
+            <MenuItem value="2">Emilie</MenuItem>
+            <MenuItem value="3">Paul</MenuItem>
+          </SelectField>
+          <SelectField name="patient" label="Patient" disabledLabel="Choisissez un patient">
             <MenuItem value="1">Option 1</MenuItem>
             <MenuItem value="2">Option 2</MenuItem>
             <MenuItem value="3">Option 3</MenuItem>
