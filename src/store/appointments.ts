@@ -15,6 +15,12 @@ export const postAppointment = createAsyncThunk('postAppointment', async (body: 
   return parseIds(parsedResponse) as Appointment;
 });
 
+export const deleteAppointment = createAsyncThunk('deleteAppointment', async (id: number) => {
+  const response = await fetch(`${SERVER_API_ENDPOINT}/appointments/${id}`, { method: 'DELETE' });
+  const parsedResponse = await response.json();
+  return parseIds(parsedResponse) as Appointment;
+});
+
 const appointmentsAdapter = createEntityAdapter<Appointment>({
   sortComparer: (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
 });
@@ -43,6 +49,9 @@ const appointmentsSlice = createSlice({
     });
     builder.addCase(postAppointment.fulfilled, (state, action) => {
       appointmentsAdapter.addOne(state, action.payload);
+    });
+    builder.addCase(deleteAppointment.fulfilled, (state, action) => {
+      appointmentsAdapter.removeOne(state, action.payload.id);
     });
   },
 });

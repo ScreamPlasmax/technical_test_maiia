@@ -9,6 +9,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import Button from 'components/atoms/buttons/Button';
 import { Appointment, Patient, Practitioner } from '@prisma/client';
 import { format } from 'date-fns';
+import { useAppDispatch } from 'store';
+import { deleteAppointment } from 'store/appointments';
 
 type Props = {
   appointment: Appointment;
@@ -48,6 +50,11 @@ const useStyles = makeStyles((theme) => ({
 const AppointmentCard: FC<Props> = (props) => {
   const { appointment, patient, practitioner } = props;
   const classes = useStyles();
+  const dispatch = useAppDispatch();
+
+  const onCancelClick = () => {
+    dispatch(deleteAppointment(appointment.id));
+  };
 
   return (
     <Card>
@@ -88,7 +95,9 @@ const AppointmentCard: FC<Props> = (props) => {
             </>
           )}
         </div>
-        <Button variant="contained">Cancel</Button>
+        <Button variant="contained" onClick={onCancelClick}>
+          Cancel
+        </Button>
       </CardFooter>
     </Card>
   );
