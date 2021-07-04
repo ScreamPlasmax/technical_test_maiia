@@ -5,7 +5,7 @@ import { appointmentsSelectors } from 'store/appointments';
 import AppointmentCard from 'components/atoms/cards/AppointmentCard';
 import { patientsSelectors } from 'store/patients';
 import { practitionersSelectors } from 'store/practitioners';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import { useMemo } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
+  },
+  noAppointments: {
+    marginTop: theme.spacing(3),
   },
   cardContainer: {
     width: 400,
@@ -45,6 +48,11 @@ const AppointmentList = () => {
 
   return (
     <div className={classes.root}>
+      {appointments.length === 0 && (
+        <Typography variant="body1" classes={{ root: classes.noAppointments }}>
+          Il n'y a pas de rendez-vous. Vous pouvez en créer un via le formulaire ci-dessus !
+        </Typography>
+      )}
       {appointments.map((appointment) => {
         const patient = patientsMapper[appointment.patientId];
         const practitioner = practitionersMapper[appointment.practitionerId];
