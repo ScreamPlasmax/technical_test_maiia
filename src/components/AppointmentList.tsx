@@ -23,7 +23,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   searchAppointments: {
-    width: 300,
+    marginBottom: theme.spacing(2),
+    display: 'flex',
+    justifyContent: 'center',
+    '& > input': {
+      width: 300,
+    },
   },
 }));
 
