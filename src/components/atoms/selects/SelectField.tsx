@@ -39,11 +39,13 @@ const SelectField: FC<Props> = (props) => {
   const classes = useStyles();
   const [field, meta] = useField(name);
   const errorMessage = meta.touched && meta.error;
+  const { value, ...fieldRest } = field;
 
   return (
     <FormControl fullWidth error={!!errorMessage} classes={{ root: classes.formControlSelect }}>
       <InputLabel classes={{ root: classes.inputLabelRoot }}>{label}</InputLabel>
-      <Select {...rest} {...field}>
+      {/* The forced value as 'none' is a dirty hack because of MUI label's behavior when no value */}
+      <Select {...rest} value={value === null ? 'none' : value} {...fieldRest}>
         {children}
       </Select>
       {errorMessage && <FormHelperText>{errorMessage}</FormHelperText>}
