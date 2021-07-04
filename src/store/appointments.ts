@@ -41,6 +41,9 @@ const appointmentsSlice = createSlice({
       state.error = action.error;
       state.loading = false;
     });
+    builder.addCase(postAppointment.fulfilled, (state, action) => {
+      appointmentsAdapter.addOne(state, action.payload);
+    });
   },
 });
 
