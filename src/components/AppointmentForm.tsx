@@ -6,7 +6,8 @@ import { useEffect } from 'react';
 import { StoreType, useAppDispatch } from 'store';
 import { useSelector } from 'react-redux';
 import { getPractitioners, practitionersSelectors } from 'store/practitioners';
-import { Practitioner } from '@prisma/client';
+import { Patient, Practitioner } from '@prisma/client';
+import { getPatients, patientsSelectors } from 'store/patients';
 
 const initialValues = {
   practitioner: null,
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
-  practitionerSpecialty: {
+  optionSideInformation: {
     color: '#3FB0AA',
   },
 }));
@@ -46,9 +47,11 @@ const AppointmentForm = () => {
   const practitioners = useSelector<StoreType, Practitioner[]>((state) =>
     practitionersSelectors.selectAll(state.practitioners),
   );
+  const patients = useSelector<StoreType, Patient[]>((state) => patientsSelectors.selectAll(state.patients));
 
   useEffect(() => {
     dispatch(getPractitioners());
+    dispatch(getPatients());
   }, []);
 
   return (
@@ -70,14 +73,16 @@ const AppointmentForm = () => {
                 <span>
                   {practitioner.firstName} {practitioner.lastName}
                 </span>
-                <span className={classes.practitionerSpecialty}>{practitioner.speciality}</span>
+                <span className={classes.optionSideInformation}>{practitioner.speciality}</span>
               </MenuItem>
             ))}
           </SelectField>
           <SelectField name="patient" label="Patient" disabledLabel="Choisissez un patient">
-            <MenuItem value="1">Option 1</MenuItem>
-            <MenuItem value="2">Option 2</MenuItem>
-            <MenuItem value="3">Option 3</MenuItem>
+            {patients.map((patient) => (
+              <MenuItem key={patient.id} value={patient.id}>
+                {`${patient.firstName} ${patient.lastName}`}
+              </MenuItem>
+            ))}
           </SelectField>
           <Button type="submit">Valider</Button>
         </Form>
