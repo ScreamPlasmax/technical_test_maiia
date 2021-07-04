@@ -8,6 +8,7 @@ const useStyle = makeStyles((theme) => ({
     color: theme.palette.common.white,
     display: 'flex',
     alignItems: 'center',
+    whiteSpace: 'nowrap',
   },
 }));
 
