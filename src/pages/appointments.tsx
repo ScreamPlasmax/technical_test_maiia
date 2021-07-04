@@ -2,8 +2,23 @@ import AppointmentForm from 'components/AppointmentForm';
 import AppointmentList from 'components/AppointmentList';
 import Section from 'components/Section';
 import AllTasks from 'components/AllTasks';
+import { useEffect } from 'react';
+import { getPractitioners } from 'store/practitioners';
+import { getPatients } from 'store/patients';
+import { getTimeSlots } from 'store/timeslots';
+import { getAppointments } from 'store/appointments';
+import { useAppDispatch } from 'store';
 
 const AppointmentsPage = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getPractitioners());
+    dispatch(getPatients());
+    dispatch(getTimeSlots());
+    dispatch(getAppointments());
+  }, []);
+
   return (
     <div className="appointment page">
       <h1>Appointments</h1>

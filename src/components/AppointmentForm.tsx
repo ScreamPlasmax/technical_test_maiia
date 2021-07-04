@@ -2,16 +2,15 @@ import { Form, Formik } from 'formik';
 import Button from 'components/atoms/buttons/Button';
 import { makeStyles, MenuItem } from '@material-ui/core';
 import SelectField from 'components/atoms/selects/SelectField';
-import { useEffect } from 'react';
 import { StoreType, useAppDispatch } from 'store';
 import { useSelector } from 'react-redux';
-import { getPractitioners, practitionersSelectors } from 'store/practitioners';
+import { practitionersSelectors } from 'store/practitioners';
 import { Patient, Practitioner, Timeslot } from '@prisma/client';
-import { getPatients, patientsSelectors } from 'store/patients';
+import { patientsSelectors } from 'store/patients';
 import TimeslotsSelectField from 'components/atoms/selects/TimeslotsSelectField';
 import * as Yup from 'yup';
-import { getTimeSlots, timeslotsSelectors } from 'store/timeslots';
-import { getAppointments, postAppointment } from 'store/appointments';
+import { timeslotsSelectors } from 'store/timeslots';
+import { postAppointment } from 'store/appointments';
 
 const initialValues = {
   practitioner: null,
@@ -65,13 +64,6 @@ const AppointmentForm = () => {
   );
   const patients = useSelector<StoreType, Patient[]>((state) => patientsSelectors.selectAll(state.patients));
   const timeslots = useSelector<StoreType, Timeslot[]>((state) => timeslotsSelectors.selectAll(state.timeslots));
-
-  useEffect(() => {
-    dispatch(getPractitioners());
-    dispatch(getPatients());
-    dispatch(getTimeSlots());
-    dispatch(getAppointments());
-  }, []);
 
   return (
     <div className={classes.form}>
