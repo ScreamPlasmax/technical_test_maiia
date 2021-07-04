@@ -58,7 +58,7 @@ const AppointmentCard: FC<Props> = (props) => {
         </Typography>
         <ScheduleIcon classes={{ root: classes.icons }} />
         <Typography variant="subtitle1" component="span">
-          {format(new Date(appointment.startDate), 'mm:HH')}
+          {format(new Date(appointment.startDate), 'HH:mm')}
         </Typography>
       </CardHeader>
       <CardContent classes={{ root: classes.cardContent }}>
