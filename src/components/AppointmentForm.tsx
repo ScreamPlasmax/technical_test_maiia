@@ -8,10 +8,12 @@ import { useSelector } from 'react-redux';
 import { getPractitioners, practitionersSelectors } from 'store/practitioners';
 import { Patient, Practitioner } from '@prisma/client';
 import { getPatients, patientsSelectors } from 'store/patients';
+import TimeslotsSelectField from 'components/atoms/selects/TimeslotsSelectField';
 
 const initialValues = {
   practitioner: null,
   patient: null,
+  timeslot: null,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -84,6 +86,8 @@ const AppointmentForm = () => {
               </MenuItem>
             ))}
           </SelectField>
+          <TimeslotsSelectField />
+
           <Button type="submit">Valider</Button>
         </Form>
       </Formik>
