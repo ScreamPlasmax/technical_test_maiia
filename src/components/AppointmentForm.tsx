@@ -6,10 +6,12 @@ import { useEffect } from 'react';
 import { StoreType, useAppDispatch } from 'store';
 import { useSelector } from 'react-redux';
 import { getPractitioners, practitionersSelectors } from 'store/practitioners';
-import { Patient, Practitioner } from '@prisma/client';
+import { Patient, Practitioner, Timeslot } from '@prisma/client';
 import { getPatients, patientsSelectors } from 'store/patients';
 import TimeslotsSelectField from 'components/atoms/selects/TimeslotsSelectField';
 import * as Yup from 'yup';
+import { getTimeSlots, timeslotsSelectors } from 'store/timeslots';
+import { getAppointments, postAppointment } from 'store/appointments';
 
 const initialValues = {
   practitioner: null,
@@ -57,10 +59,13 @@ const AppointmentForm = () => {
     practitionersSelectors.selectAll(state.practitioners),
   );
   const patients = useSelector<StoreType, Patient[]>((state) => patientsSelectors.selectAll(state.patients));
+  const timeslots = useSelector<StoreType, Timeslot[]>((state) => timeslotsSelectors.selectAll(state.timeslots));
 
   useEffect(() => {
     dispatch(getPractitioners());
     dispatch(getPatients());
+    dispatch(getTimeSlots());
+    dispatch(getAppointments());
   }, []);
 
   return (
@@ -73,7 +78,19 @@ const AppointmentForm = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(data) => {
-          console.log(data);
+          const selectedTimeslot = timeslots.find((timeslot) => timeslot.id === data.timeslot);
+
+          if (!selectedTimeslot) {
+            return;
+          }
+          const body = {
+            patientId: data.patient,
+            practitionerId: data.practitioner,
+            startDate: selectedTimeslot.startDate,
+            endDate: selectedTimeslot.endDate,
+          };
+
+          dispatch(postAppointment(JSON.stringify(body)));
         }}
       >
         <Form className={classes.formContent}>
@@ -94,7 +111,7 @@ const AppointmentForm = () => {
               </MenuItem>
             ))}
           </SelectField>
-          <TimeslotsSelectField />
+          <TimeslotsSelectField timeslots={timeslots} />
 
           <Button type="submit">Valider</Button>
         </Form>

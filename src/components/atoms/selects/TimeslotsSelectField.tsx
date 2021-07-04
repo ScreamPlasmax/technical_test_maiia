@@ -1,12 +1,14 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { ListSubheader, makeStyles, MenuItem } from '@material-ui/core';
 import SelectField from 'components/atoms/selects/SelectField';
-import { getTimeSlots, timeslotsSelectors } from 'store/timeslots';
-import { useSelector } from 'react-redux';
-import { StoreType, useAppDispatch } from 'store';
+
 import { Timeslot } from '@prisma/client';
 import { useField } from 'formik';
 import { format } from 'date-fns';
+
+type Props = {
+  timeslots: Timeslot[];
+};
 
 const useStyles = makeStyles(() => ({
   colorPrimary: {
@@ -14,11 +16,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const TimeslotsSelectField: FC = () => {
+const TimeslotsSelectField: FC<Props> = (props) => {
+  const { timeslots } = props;
   const classes = useStyles();
-  const dispatch = useAppDispatch();
   const [field, meta] = useField('practitioner');
-  const timeslots = useSelector<StoreType, Timeslot[]>((state) => timeslotsSelectors.selectAll(state.timeslots));
   const practitionerTimeslots = timeslots.filter((timeslot) => timeslot.practitionerId === field.value);
 
   // We regroup all the timeslots by date so that we can easily show them in the select
@@ -34,10 +35,6 @@ const TimeslotsSelectField: FC = () => {
     const [date, timeslots] = curr;
 
     return [...acc, { date }, ...timeslots];
-  }, []);
-
-  useEffect(() => {
-    dispatch(getTimeSlots());
   }, []);
 
   return (
