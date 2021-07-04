@@ -9,12 +9,19 @@ import { getPractitioners, practitionersSelectors } from 'store/practitioners';
 import { Patient, Practitioner } from '@prisma/client';
 import { getPatients, patientsSelectors } from 'store/patients';
 import TimeslotsSelectField from 'components/atoms/selects/TimeslotsSelectField';
+import * as Yup from 'yup';
 
 const initialValues = {
   practitioner: null,
   patient: null,
   timeslot: null,
 };
+
+const validationSchema = Yup.object().shape({
+  practitioner: Yup.number().nullable().required('Le praticien est requis'),
+  patient: Yup.number().nullable().required('Le patient est requis'),
+  timeslot: Yup.number().nullable().required('Le timeslot est requis'),
+});
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -64,6 +71,7 @@ const AppointmentForm = () => {
       </div>
       <Formik
         initialValues={initialValues}
+        validationSchema={validationSchema}
         onSubmit={(data) => {
           console.log(data);
         }}
