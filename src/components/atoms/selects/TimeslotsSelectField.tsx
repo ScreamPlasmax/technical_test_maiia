@@ -8,7 +8,7 @@ import { Timeslot } from '@prisma/client';
 import { useField } from 'formik';
 import { format } from 'date-fns';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   colorPrimary: {
     color: '#3FB0AA',
   },
@@ -46,28 +46,21 @@ const TimeslotsSelectField: FC = () => {
       disabled={!field.value || (meta.touched && !!meta.error)}
     >
       {orderedTimeslots.map((element) => {
-        return element.date ? (
-          <ListSubheader key={element.date} classes={classes} color="primary">
-            {format(new Date(element.date), 'd MMM yyyy')}
+        // Typescript doesn't allow discriminal union arrays. I'm curious to have
+        // a real solution to this.
+        const el1 = element as { date: string };
+        const el2 = element as Timeslot;
+
+        return el1.date ? (
+          <ListSubheader key={el1.date} classes={classes} color="primary">
+            {format(new Date(el1.date), 'd MMM yyyy')}
           </ListSubheader>
         ) : (
-          <MenuItem key={element.id} value={element.id}>
-            {format(new Date(element.startDate), 'HH:mm')} - {format(new Date(element.endDate), 'HH:mm')}
+          <MenuItem key={el2.id} value={el2.id}>
+            {format(new Date(el2.startDate), 'HH:mm')} - {format(new Date(el2.endDate), 'HH:mm')}
           </MenuItem>
         );
       })}
-      {/*{Object.entries(timeslotsByDate).map(([date, timeslots]) => (*/}
-      {/*  <div key={date}>*/}
-      {/*    <ListSubheader classes={classes} color="primary">*/}
-      {/*      {format(new Date(date), 'd MMM yyyy')}*/}
-      {/*    </ListSubheader>*/}
-      {/*    {timeslots.map((timeslot) => (*/}
-      {/*      <MenuItem key={timeslot.id} value={timeslot.id}>*/}
-      {/*        {format(new Date(timeslot.startDate), 'HH:mm')} - {format(new Date(timeslot.endDate), 'HH:mm')}*/}
-      {/*      </MenuItem>*/}
-      {/*    ))}*/}
-      {/*  </div>*/}
-      {/*))}*/}
     </SelectField>
   );
 };
