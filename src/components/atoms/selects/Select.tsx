@@ -3,6 +3,8 @@ import { makeStyles, Select as MUISelect, SelectProps } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   select: {
+    display: 'flex',
+    justifyContent: 'space-between',
     backgroundColor: '#F1F4F5',
     width: '100%',
     padding: '9px 35px 9px 12px',
