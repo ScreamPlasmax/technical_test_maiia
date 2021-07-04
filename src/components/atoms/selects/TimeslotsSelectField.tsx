@@ -25,7 +25,9 @@ const TimeslotsSelectField: FC = () => {
   const timeslotsByDate = practitionerTimeslots.reduce((acc: Record<string, Timeslot[]>, curr) => {
     const timeslotDate = format(new Date(curr.startDate), 'yyyy/MM/dd');
     const datesTimeslots = acc[timeslotDate] || [];
-    return { ...acc, [timeslotDate]: [...datesTimeslots, curr] };
+    acc[timeslotDate] = [...datesTimeslots, curr];
+
+    return acc;
   }, {});
 
   const orderedTimeslots = Object.entries(timeslotsByDate).reduce((acc: ({ date: string } | Timeslot)[], curr) => {

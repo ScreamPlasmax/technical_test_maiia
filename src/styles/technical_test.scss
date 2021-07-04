@@ -35,3 +35,9 @@
   cursor: not-allowed !important;
   pointer-events: auto;
 }
+
+// Again, another dirty fix to avoid the select to close and to trigger the onChange when clicking on
+// a SubHeader element. cf : https://github.com/mui-org/material-ui/issues/18200
+.MuiListSubheader-root {
+  pointer-events: none;
+}
