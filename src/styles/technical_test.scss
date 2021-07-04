@@ -28,3 +28,10 @@
     color: #999A9B;
   }
 }
+
+// Dirty fix because MUI forces the cursor to be the default one, even when the input is disabled.
+// This overrides this behavior, but will be applied even when not wanted... It works for this small project though
+.Mui-disabled {
+  cursor: not-allowed !important;
+  pointer-events: auto;
+}
