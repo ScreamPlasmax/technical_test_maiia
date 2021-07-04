@@ -13,7 +13,7 @@ const styledByVariant = (mapping: MappingType) => styledBy('variant', mapping);
 const theme = createMuiTheme({
   palette: {
     primary: { main: '#000', dark: '#E35D78', light: '#F68092' },
-    secondary: { main: '#FFF' },
+    secondary: { main: '#FFF', light: '#64c9c3' },
     text: { primary: '#606060' },
   },
   typography: {
@@ -25,6 +25,7 @@ const theme = createMuiTheme({
         borderRadius: 100,
         textTransform: 'none',
         fontSize: 16,
+        marginTop: 0,
         color: styledByVariant({
           contained: 'white',
           outlined: '#3FB0AA',

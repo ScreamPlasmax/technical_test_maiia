@@ -1,18 +1,11 @@
 import { FC } from 'react';
-import { Button as MUIButton, ButtonProps, makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles(() => ({
-  root: {
-    marginTop: 20,
-  },
-}));
+import { Button as MUIButton, ButtonProps } from '@material-ui/core';
 
 const Button: FC<ButtonProps> = (props) => {
   const { children, variant = 'contained', ...rest } = props;
-  const classes = useStyles();
 
   return (
-    <MUIButton disableElevation variant={variant} classes={classes} {...rest}>
+    <MUIButton disableElevation variant={variant} {...rest}>
       {children}
     </MUIButton>
   );

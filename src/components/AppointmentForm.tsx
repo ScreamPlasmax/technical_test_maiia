@@ -43,6 +43,11 @@ const useStyles = makeStyles((theme) => ({
   formContent: {
     padding: '24px',
   },
+  formActions: {
+    marginTop: theme.spacing(3),
+    display: 'flex',
+    flexDirection: 'column',
+  },
   menuItemRoot: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -113,7 +118,9 @@ const AppointmentForm = () => {
           </SelectField>
           <TimeslotsSelectField timeslots={timeslots} />
 
-          <Button type="submit">Valider</Button>
+          <div className={classes.formActions}>
+            <Button type="submit">Valider</Button>
+          </div>
         </Form>
       </Formik>
     </div>
