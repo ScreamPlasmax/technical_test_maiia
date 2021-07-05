@@ -45,8 +45,8 @@ const TimeslotsSelectField: FC<Props> = (props) => {
       disabled={!field.value || (meta.touched && !!meta.error)}
     >
       {orderedTimeslots.map((element) => {
-        // Typescript doesn't allow discriminal union arrays. I'm curious to have
-        // a real solution to this.
+        // Typescript doesn't allow discriminal union arrays. I'm curious to
+        // have a real solution to this.
         const el1 = element as { date: string };
         const el2 = element as Timeslot;
 
